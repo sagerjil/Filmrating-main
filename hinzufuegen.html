@@ -48,7 +48,6 @@
     }
 
     textarea {
-      resize: vertical;
       min-height: 80px;
     }
 
@@ -60,19 +59,17 @@
       background-color: rgb(90, 25, 2);
       border: none;
       border-radius: 5px;
-      transition: background 0.3s ease;
     }
 
     .link-button {
       display: inline-block;
-      margin-top: 20px;
-      padding: 10px 20px;
+      margin-top: 50px;
+      padding: 15px 20px;
       font-size: 16px;
       color: white;
       background-color: rgb(90, 25, 2);
       text-decoration: none;
       border-radius: 5px;
-      transition: background 0.3s ease, transform 0.2s ease;
     }
 
     .link-button:hover {
@@ -80,15 +77,8 @@
       transform: scale(1.05);
     }
 
-    .link-button:active {
-      transform: scale(0.95);
-    }
-
-    @media (max-width: 600px) {
-      #form-container {
-        width: 80%;
-      }
-    }
+  
+  
   </style>
 </head>
 
@@ -99,19 +89,20 @@
   <div id="form-container">
     <form id="bewertungForm" onsubmit="submitForm(event)">
       <label for="filmname">Filmname:</label>
-      <input type="text" name="filmname" id="filmname" required>
+      <input type="text" name="Name" id="filmname" required>
 
       <label for="kommentar">Kommentar:</label>
-      <textarea name="kommentar" id="kommentar" required></textarea>
+      <textarea name="Kommentar" id="kommentar" required></textarea>
 
       <label for="sterne">Bewertung (1–5):</label>
-      <input type="number" name="sterne" id="sterne" min="1" max="5" required>
+      <input type="number" name="Bewertung" id="sterne" min="1" max="5" required>
 
       <button type="submit">Bewertung speichern</button>
     </form>
   </div>
 
-  <a href="bewertung.html" class="link-button">Zurück zur Übersicht →</a>
+  <a href="bewertung.html" class="link-button">Zurück zur Übersicht  →</a>
+
 
   <script>
     function submitForm(event) {
@@ -124,7 +115,7 @@
         daten[key] = value;
       }
 
-      fetch('https://pb32.toiwxr.easypanel.host/api/collections/Film_bewertungen/records', {
+      fetch('https://pb32.toiwxr.easypanel.host/api/collections/Film_bewertungen/records/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -134,7 +125,7 @@
         .then(response => response.json())
         .then(data => {
           alert('Bewertung erfolgreich gespeichert!');
-          window.location.href = 'bewertungen.html';
+          window.location.href = 'bewertung.html';
         })
         .catch(error => {
           alert('Fehler beim Speichern. Bitte versuche es später erneut.');

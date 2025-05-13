@@ -22,7 +22,6 @@
       border-collapse: collapse;
       background-color: white;
       border-radius: 8px;
-      overflow: hidden;
       box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     }
 
@@ -44,7 +43,7 @@
     .link-button {
       display: inline-block;
       margin-top: 20px;
-      padding: 10px 20px;
+      padding: 15px 20px;
       font-size: 16px;
       color: white;
       background-color: rgb(90, 25, 2);
@@ -57,9 +56,6 @@
       transform: scale(1.05);
     }
 
-    .link-button:active {
-      transform: scale(0.95);
-    }
   </style>
 </head>
 <body>
@@ -84,7 +80,7 @@
   <script>
     async function fetchBewertungen() {
       try {
-        const response = await fetch('https://pb32.toiwxr.easypanel.host/api/collections/Film_bewertungen/records');
+        const response = await fetch('https://pb32.toiwxr.easypanel.host/api/collections/Film_bewertungen/records/');
         const data = await response.json();
         const tbody = document.getElementById('bewertungTableBody');
         tbody.innerHTML = '';
@@ -96,12 +92,10 @@
           const sterneCell = document.createElement('td');
           const loeschenCell = document.createElement('td');
 
-          filmCell.textContent = item.filmname;
-          kommentarCell.textContent = item.kommentar;
-          sterneCell.textContent = item.sterne + " ⭐";
+          filmCell.textContent = item.Name;
+          kommentarCell.textContent = item.Kommentar;
+          sterneCell.textContent = item.Bewertung + " ⭐";
           loeschenCell.textContent = 'X';
-          loeschenCell.style.cursor = 'pointer';
-          loeschenCell.style.color = 'red';
           loeschenCell.onclick = () => loeschen(item.id);
 
           row.appendChild(filmCell);
@@ -117,7 +111,7 @@
     }
 
     function loeschen(itemId) {
-      fetch('https://pb32.toiwxr.easypanel.host/api/collections/Film_bewertungen/records' + itemId, {
+      fetch('https://pb32.toiwxr.easypanel.host/api/collections/Film_bewertungen/records/' + itemId, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
